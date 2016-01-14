@@ -16,5 +16,22 @@ namespace spclient
         {
             InitializeComponent();
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void connectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var cf = new ConnectForm();
+            cf.Show();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var ab1 = new AboutBox1();
+            ab1.Show();
+        }
     }
 }
