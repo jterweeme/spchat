@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 
 namespace spserver
 {
@@ -54,6 +52,29 @@ namespace spserver
             {
                 client.DisplayString(message);
             }
+        }
+
+        public Client GetUser(string username)
+        {
+            foreach (var client in _clientList)
+            {
+                if (client.Name == username)
+                {
+                    return client;
+                }
+            }
+
+            return null;
+        }
+
+        public bool IsUserOnline(string username)
+        {
+            return GetUser(username) != null;
+        }
+
+        public void RemoveClient(Client client)
+        {
+            _clientList.Remove(client);
         }
     }
 }

@@ -32,8 +32,8 @@ namespace spserver.Commands
         {
             if (parameters.Length != 2)
             {
-                // TODO Error
-                throw new System.NotImplementedException();
+                client.DisplayString("Incorrect syntax. Use /login [username] [password]");
+                return;
             }
 
             var username = parameters[0];
@@ -41,15 +41,14 @@ namespace spserver.Commands
 
             var isLoginSuccessful = ClientAuthenticator.Authenticate(client, username, password);
 
-            if (isLoginSuccessful)
-            {
-                client.DisplayString($"Logged in as {username}.");
-                Server.GetServer().BroadcastMessage($"{username} joined the chat.");
-            }
-            else
+            if (!isLoginSuccessful)
             {
                 client.DisplayString("Username and password do not match.");
+                return;
             }
+
+            client.DisplayString($"Logged in as {username}.");
+            Server.GetServer().BroadcastMessage($"{username} has joined the chat.");
         }
     }
 }

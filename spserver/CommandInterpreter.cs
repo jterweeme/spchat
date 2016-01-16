@@ -1,5 +1,4 @@
-﻿using System;
-using spserver.Commands;
+﻿using spserver.Commands;
 using System.Collections.Generic;
 
 namespace spserver

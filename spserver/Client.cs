@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
@@ -19,12 +18,18 @@ namespace spserver
 
         private void ClientThread()
         {
-            // TODO Check if client disconnected
             while (true)
             {
+                if (!ClientSocket.Connected)
+                {
+                    Server.GetServer().RemoveClient(this);
+                    Server.GetServer().BroadcastMessage($"{Name} has left the chat.");
+                    break;
+                }
+
                 if (ClientSocket.Available <= 0)
                 {
-                    Thread.Sleep(1);
+                    Thread.Sleep(5);
                     continue;
                 }
 

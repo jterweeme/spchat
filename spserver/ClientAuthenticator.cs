@@ -1,7 +1,4 @@
-﻿using System.CodeDom;
-using System.Net.Sockets;
-
-namespace spserver
+﻿namespace spserver
 {
     internal static class ClientAuthenticator
     {
