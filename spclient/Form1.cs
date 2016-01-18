@@ -66,8 +66,15 @@ namespace spclient
         {
             while (_clientSocket.Connected)
             {
-                var message = _binaryStream.Reader.ReadString();
-                DisplayMessage(message);
+                try
+                {
+                    var message = _binaryStream.Reader.ReadString();
+                    DisplayMessage(message);
+                }
+                catch (Exception)
+                {
+                    DisplayMessage("The connection to the server unexpectedly closed.");
+                }
 
                 Thread.Sleep(5);
             }
@@ -89,8 +96,15 @@ namespace spclient
 
         private void ButtonSend_Click(object sender, EventArgs e)
         {
-            SendMessage(TextBoxUserInput.Text);
             TextBoxUserInput.Text = string.Empty;
+
+            if (!_clientSocket.Connected)
+            {
+                DisplayMessage("Not connected to any server. Please connect first.");
+                return;
+            }
+
+            SendMessage(TextBoxUserInput.Text);
         }
 
         private void SendMessage(string message)
