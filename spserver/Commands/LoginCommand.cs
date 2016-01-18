@@ -1,10 +1,11 @@
 ﻿using System;
+using spserver.Utilities;
 
 namespace spserver.Commands
 {
     class LoginCommand : ICommand
     {
-        public Action<Client, string[]> Action => new Action<Client, string[]>(Login);
+        public Action<Client, string[]> Action => Login;
 
         public bool ClientMustBeAuthenticated => false;
 
@@ -31,6 +32,8 @@ namespace spserver.Commands
 
             client.DisplayString($"Logged in as {username}.");
             Server.GetServer().BroadcastMessage($"{username} has joined the chat.");
+
+            BetterConsole.WriteLog($"{username} logged in.");
         }
     }
 }

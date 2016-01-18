@@ -14,6 +14,7 @@ namespace spserver
             _commandList = new List<ICommand>();
             _commandList.Add(new LoginCommand());
             _commandList.Add(new PrivateMessageCommand());
+            _commandList.Add(new RegisterCommand());
             _commandList.Add(new FartCommand());
         }
 

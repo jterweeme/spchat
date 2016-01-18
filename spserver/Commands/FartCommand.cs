@@ -6,7 +6,7 @@ namespace spserver.Commands
     // Just a test command!
     class FartCommand : ICommand
     {
-        public Action<Client, string[]> Action => new Action<Client, string[]>(Fart);
+        public Action<Client, string[]> Action => Fart;
 
         public bool ClientMustBeAuthenticated => true;
 

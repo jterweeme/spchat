@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
+using spserver.Models;
 using spserver.Utilities;
 
 namespace spserver
@@ -59,22 +61,14 @@ namespace spserver
             BetterConsole.WriteLog($"Public chat: {message}");
         }
 
-        public void BroadcastChatMessage(Client from, string message)
+        public void BroadcastChatMessage(ChatMessage chatMessage)
         {
-            BroadcastMessage($"{from.User.Username} says: {message}");
+            BroadcastMessage($"{chatMessage.FromUser} says: {chatMessage.Message}");
         }
 
         public Client GetUser(string username)
         {
-            foreach (var client in _clientList)
-            {
-                if (client.User.Username == username)
-                {
-                    return client;
-                }
-            }
-
-            return null;
+            return _clientList.FirstOrDefault(c => c.User.Username == username);
         }
 
         public bool IsUserOnline(string username)

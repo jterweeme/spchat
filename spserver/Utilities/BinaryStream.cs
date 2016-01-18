@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Security;
+﻿using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace spserver.Utilities
 {
@@ -15,8 +10,8 @@ namespace spserver.Utilities
 
         public BinaryStream(Stream stream)
         {
-            Reader = new BinaryReader(stream);
-            Writer = new BinaryWriter(stream);
+            Reader = new BinaryReader(stream, Encoding.UTF8);
+            Writer = new BinaryWriter(stream, Encoding.UTF8);
         }
     }
 }

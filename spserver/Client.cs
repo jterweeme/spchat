@@ -2,15 +2,15 @@
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Authentication;
-using System.Text;
 using System.Threading;
+using spserver.Models;
 using spserver.Utilities;
 
 namespace spserver
 {
     class Client
     {
-        private TcpClient _clientSocket;
+        private readonly TcpClient _clientSocket;
 
         public bool Authenticated { get; set; }
         public BinaryStream Stream { get; set; }
@@ -39,13 +39,6 @@ namespace spserver
         {
             while (_clientSocket.Connected)
             {
-                /*if (_clientSocket.Available <= 0)
-                {
-                    Thread.Sleep(5);
-                    continue;
-                }
-
-                var message = TcpMessage.GetString(_clientSocket);*/
                 var message = Stream.Reader.ReadString();
 
                 if (message.StartsWith("/"))
@@ -60,7 +53,17 @@ namespace spserver
                     continue;
                 }
 
-                Server.GetServer().BroadcastChatMessage(this, message);
+                var chatMessage = new ChatMessage
+                {
+                    FromUser = User.Username,
+                    ToUser = "Everyone",
+                    Message = message,
+                    Time = DateTime.Now
+                };
+
+                Server.GetServer().BroadcastChatMessage(chatMessage);
+                Database.GetDatabase().ChatMessages.Add(chatMessage);
+
             }
 
             Server.GetServer().RemoveClient(this);
@@ -97,11 +100,6 @@ namespace spserver
 
         public void DisplayString(string s)
         {
-            /*var stream = ClientSocket.GetStream();
-            var bytes = Encoding.ASCII.GetBytes(s);
-            stream.Write(bytes, 0, bytes.Length);
-            stream.Flush();*/
-
             Stream.Writer.Write(s);
             Stream.Writer.Flush();
         }
