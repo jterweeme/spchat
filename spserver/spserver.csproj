@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\HelpCommand.cs" />
+    <Compile Include="Commands\ListUsersCommand.cs" />
     <Compile Include="Models\ChatMessage.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientAuthenticator.cs" />

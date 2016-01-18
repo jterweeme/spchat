@@ -6,16 +6,21 @@ namespace spserver.Commands
     class LoginCommand : ICommand
     {
         public Action<Client, string[]> Action => Login;
-
         public bool ClientMustBeAuthenticated => false;
-
         public string Command => "login";
+        public string Description => "Login with specified credentials.";
 
         private void Login(Client client, string[] parameters)
         {
             if (parameters.Length != 2)
             {
                 client.DisplayString("Incorrect syntax. Use /login [username] [password]");
+                return;
+            }
+
+            if (client.Authenticated == true)
+            {
+                client.DisplayString("You are already logged in.");
                 return;
             }
 

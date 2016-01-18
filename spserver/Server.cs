@@ -13,7 +13,7 @@ namespace spserver
         private static Server _server;
 
         private TcpListener _serverSocket;
-        private readonly List<Client> _clientList;
+        public List<Client> Clients { get; }
 
         public X509Certificate2 Certificate { get; }
 
@@ -21,7 +21,7 @@ namespace spserver
         {
             Certificate = new X509Certificate2("certificate.pfx", "SuperSecretPassword");
 
-            _clientList = new List<Client>();
+            Clients = new List<Client>();
         }
 
         public static Server GetServer()
@@ -47,13 +47,13 @@ namespace spserver
                 BetterConsole.WriteLog($"New client connected.");
                 var unauthenticatedClient = new Client(clientSocket);
 
-                _clientList.Add(unauthenticatedClient);
+                Clients.Add(unauthenticatedClient);
             }
         }
 
         public void BroadcastMessage(string message)
         {
-            foreach (var client in _clientList)
+            foreach (var client in Clients)
             {
                 client.DisplayString(message);
             }
@@ -68,7 +68,7 @@ namespace spserver
 
         public Client GetUser(string username)
         {
-            return _clientList.FirstOrDefault(c => c.User.Username == username);
+            return Clients.FirstOrDefault(c => c.User.Username == username);
         }
 
         public bool IsUserOnline(string username)
@@ -78,7 +78,7 @@ namespace spserver
 
         public void RemoveClient(Client client)
         {
-            _clientList.Remove(client);
+            Clients.Remove(client);
         }
     }
 }

@@ -6,16 +6,21 @@ namespace spserver.Commands
     class RegisterCommand : ICommand
     {
         public Action<Client, string[]> Action => Register;
-
         public bool ClientMustBeAuthenticated => false;
-
         public string Command => "register";
+        public string Description => "Registers a new user.";
 
         private void Register(Client client, string[] parameters)
         {
             if (parameters.Length != 2)
             {
                 client.DisplayString("Incorrect syntax. Use /register [username] [password]");
+                return;
+            }
+
+            if (client.Authenticated == true)
+            {
+                client.DisplayString("You are already logged in.");
                 return;
             }
 

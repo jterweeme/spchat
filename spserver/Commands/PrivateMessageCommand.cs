@@ -7,10 +7,9 @@ namespace spserver.Commands
     class PrivateMessageCommand : ICommand
     {
         public Action<Client, string[]> Action => SendPrivateMessage;
-
         public bool ClientMustBeAuthenticated => true;
-
         public string Command => "pm";
+        public string Description => "Sends a private message to the specified user.";
 
         private void SendPrivateMessage(Client client, string[] parameters)
         {

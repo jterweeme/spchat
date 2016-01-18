@@ -7,5 +7,6 @@ namespace spserver.Commands
         Action<Client, string[]> Action { get; }
         bool ClientMustBeAuthenticated { get; }
         string Command { get; }
+        string Description { get; }
     }
 }

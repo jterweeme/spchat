@@ -7,14 +7,18 @@ namespace spserver
     {
         private static CommandInterpreter _interpreter;
 
-        private List<ICommand> _commandList;
+        public List<ICommand> Commands { get; }
 
         private CommandInterpreter()
         {
-            _commandList = new List<ICommand>();
-            _commandList.Add(new LoginCommand());
-            _commandList.Add(new PrivateMessageCommand());
-            _commandList.Add(new RegisterCommand());
+            Commands = new List<ICommand>
+            {
+                new HelpCommand(),
+                new ListUsersCommand(),
+                new LoginCommand(),
+                new PrivateMessageCommand(),
+                new RegisterCommand()
+            };
         }
 
         public static CommandInterpreter GetInterpreter()
@@ -24,7 +28,7 @@ namespace spserver
 
         public ICommand InterpretCommand(string chatCommand)
         {
-            foreach (var command in _commandList)
+            foreach (var command in Commands)
             {
                 if (command.Command.Equals(chatCommand.ToLower()))
                 {
