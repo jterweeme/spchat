@@ -1,4 +1,4 @@
-﻿using System;
+﻿using spserver.Utilities;
 
 namespace spserver
 {
@@ -8,9 +8,8 @@ namespace spserver
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Starting SpChat server...");
+            BetterConsole.WriteLog("Starting SpChat server...");
             var server = Server.GetServer();
-            Console.WriteLine($"Initialized server socket on port {Port}");
             server.Start(Port);
         }
     }

@@ -1,16 +1,35 @@
-﻿using System.Net.Sockets;
+﻿using System;
+using System.Net.Security;
+using System.Net.Sockets;
+using System.Security.Authentication;
 using System.Text;
 using System.Threading;
+using spserver.Utilities;
 
 namespace spserver
 {
     class Client
     {
-        public bool Authenticated { get; set; }
-        public TcpClient ClientSocket { get; set; }
-        public string Name { get; set; }
+        private TcpClient _clientSocket;
 
-        public void StartClientThread()
+        public bool Authenticated { get; set; }
+        public BinaryStream Stream { get; set; }
+        public UserAccount User { get; set; }
+
+        public Client(TcpClient clientSocket)
+        {
+            _clientSocket = clientSocket;
+
+            var sslStream = new SslStream(clientSocket.GetStream(), false);
+            sslStream.AuthenticateAsServer(Server.GetServer().Certificate, false, SslProtocols.Tls, true);
+            Stream = new BinaryStream(sslStream);
+
+            BetterConsole.WriteLog("Connection secured.");
+
+            StartClientThread();
+        }
+
+        private void StartClientThread()
         {
             var thread = new Thread(ClientThread);
             thread.Start();
@@ -18,22 +37,16 @@ namespace spserver
 
         private void ClientThread()
         {
-            while (true)
+            while (_clientSocket.Connected)
             {
-                if (!ClientSocket.Connected)
-                {
-                    Server.GetServer().RemoveClient(this);
-                    Server.GetServer().BroadcastMessage($"{Name} has left the chat.");
-                    break;
-                }
-
-                if (ClientSocket.Available <= 0)
+                /*if (_clientSocket.Available <= 0)
                 {
                     Thread.Sleep(5);
                     continue;
                 }
 
-                var message = TcpMessage.GetString(ClientSocket);
+                var message = TcpMessage.GetString(_clientSocket);*/
+                var message = Stream.Reader.ReadString();
 
                 if (message.StartsWith("/"))
                 {
@@ -47,8 +60,11 @@ namespace spserver
                     continue;
                 }
 
-                Server.GetServer().BroadcastMessage(Name + " says: " + message);
+                Server.GetServer().BroadcastChatMessage(this, message);
             }
+
+            Server.GetServer().RemoveClient(this);
+            Server.GetServer().BroadcastMessage($"{User.Username} has left the chat.");
         }
 
         private void ProcessCommand(string message)
@@ -81,10 +97,13 @@ namespace spserver
 
         public void DisplayString(string s)
         {
-            var stream = ClientSocket.GetStream();
+            /*var stream = ClientSocket.GetStream();
             var bytes = Encoding.ASCII.GetBytes(s);
             stream.Write(bytes, 0, bytes.Length);
-            stream.Flush();
+            stream.Flush();*/
+
+            Stream.Writer.Write(s);
+            Stream.Writer.Flush();
         }
     }
 }

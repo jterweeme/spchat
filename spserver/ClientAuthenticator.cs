@@ -7,7 +7,10 @@
             // TODO Check against user database
             if (true)
             {
-                client.Name = username;
+                client.User = new UserAccount
+                {
+                    Username = username
+                };
                 client.Authenticated = true;
                 return true;
             }

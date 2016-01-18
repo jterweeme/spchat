@@ -4,29 +4,11 @@ namespace spserver.Commands
 {
     class LoginCommand : ICommand
     {
-        public Action<Client, string[]> Action
-        {
-            get
-            {
-                return new Action<Client, string[]>(Login);
-            }
-        }
+        public Action<Client, string[]> Action => new Action<Client, string[]>(Login);
 
-        public bool ClientMustBeAuthenticated
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool ClientMustBeAuthenticated => false;
 
-        public string Command
-        {
-            get
-            {
-                return "login";
-            }
-        }
+        public string Command => "login";
 
         private void Login(Client client, string[] parameters)
         {
