@@ -32,6 +32,7 @@ namespace spserver
         private void StartClientThread()
         {
             var thread = new Thread(ClientThread);
+            thread.IsBackground = true;
             thread.Start();
         }
 
@@ -39,7 +40,16 @@ namespace spserver
         {
             while (_clientSocket.Connected)
             {
-                var message = Stream.Reader.ReadString();
+                var message = string.Empty;
+
+                try
+                {
+                    message = Stream.Reader.ReadString();
+                }
+                catch (Exception)
+                {
+                    break;
+                }
 
                 if (message.StartsWith("/"))
                 {
@@ -67,7 +77,8 @@ namespace spserver
             }
 
             Server.GetServer().RemoveClient(this);
-            Server.GetServer().BroadcastMessage($"{User.Username} has left the chat.");
+            if (Authenticated)
+                Server.GetServer().BroadcastMessage($"{User.Username} has left the chat.");
         }
 
         private void ProcessCommand(string message)

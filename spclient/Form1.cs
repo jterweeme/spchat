@@ -48,7 +48,9 @@ namespace spclient
             if (!_clientSocket.Connected)
                 return;
 
-            new Thread(GetMessageThread).Start();
+            var thread = new Thread(GetMessageThread);
+            thread.IsBackground = true;
+            thread.Start();
         }
 
         public static bool ValidateCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
@@ -74,6 +76,7 @@ namespace spclient
                 catch (Exception)
                 {
                     DisplayMessage("The connection to the server unexpectedly closed.");
+                    break;
                 }
 
                 Thread.Sleep(5);
@@ -96,6 +99,7 @@ namespace spclient
 
         private void ButtonSend_Click(object sender, EventArgs e)
         {
+            var userInput = TextBoxUserInput.Text;
             TextBoxUserInput.Text = string.Empty;
 
             if (!_clientSocket.Connected)
@@ -104,7 +108,7 @@ namespace spclient
                 return;
             }
 
-            SendMessage(TextBoxUserInput.Text);
+            SendMessage(userInput);
         }
 
         private void SendMessage(string message)
