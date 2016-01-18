@@ -1,25 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Int32;
 
 namespace spclient
 {
     public partial class ConnectForm : Form
     {
-        public ConnectForm()
+        private ConnectInformation _connectInformation;
+
+        public ConnectForm(ConnectInformation connectInformation)
         {
             InitializeComponent();
+            _connectInformation = connectInformation;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void ButtonConnect_Click(object sender, EventArgs e)
+        {
+            _connectInformation.ServerAddress = TextBoxServerAddress.Text;
+            _connectInformation.Port = Parse(TextBoxServerPort.Text);
+
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        public class ConnectInformation
+        {
+            public string ServerAddress { get; set; }
+            public int Port { get; set; }
         }
     }
 }

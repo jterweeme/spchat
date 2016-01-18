@@ -28,96 +28,79 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.LabelServerAddress = new System.Windows.Forms.Label();
+            this.TextBoxServerAddress = new System.Windows.Forms.TextBox();
+            this.TextBoxServerPort = new System.Windows.Forms.TextBox();
+            this.ButtonConnect = new System.Windows.Forms.Button();
+            this.ButtonCancel = new System.Windows.Forms.Button();
+            this.LabelPort = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // LabelServerAddress
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Server";
+            this.LabelServerAddress.AutoSize = true;
+            this.LabelServerAddress.Location = new System.Drawing.Point(12, 22);
+            this.LabelServerAddress.Name = "LabelServerAddress";
+            this.LabelServerAddress.Size = new System.Drawing.Size(38, 13);
+            this.LabelServerAddress.TabIndex = 0;
+            this.LabelServerAddress.Text = "Server";
             // 
-            // label2
+            // TextBoxServerAddress
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Username";
+            this.TextBoxServerAddress.Location = new System.Drawing.Point(92, 19);
+            this.TextBoxServerAddress.Name = "TextBoxServerAddress";
+            this.TextBoxServerAddress.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxServerAddress.TabIndex = 3;
             // 
-            // label3
+            // TextBoxServerPort
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 86);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Password";
+            this.TextBoxServerPort.Location = new System.Drawing.Point(92, 50);
+            this.TextBoxServerPort.Name = "TextBoxServerPort";
+            this.TextBoxServerPort.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxServerPort.TabIndex = 4;
             // 
-            // textBox1
+            // ButtonConnect
             // 
-            this.textBox1.Location = new System.Drawing.Point(92, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
+            this.ButtonConnect.Location = new System.Drawing.Point(15, 84);
+            this.ButtonConnect.Name = "ButtonConnect";
+            this.ButtonConnect.Size = new System.Drawing.Size(75, 23);
+            this.ButtonConnect.TabIndex = 6;
+            this.ButtonConnect.Text = "Connect";
+            this.ButtonConnect.UseVisualStyleBackColor = true;
+            this.ButtonConnect.Click += new System.EventHandler(this.ButtonConnect_Click);
             // 
-            // textBox2
+            // ButtonCancel
             // 
-            this.textBox2.Location = new System.Drawing.Point(92, 50);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
+            this.ButtonCancel.Location = new System.Drawing.Point(117, 84);
+            this.ButtonCancel.Name = "ButtonCancel";
+            this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
+            this.ButtonCancel.TabIndex = 7;
+            this.ButtonCancel.Text = "Cancel";
+            this.ButtonCancel.UseVisualStyleBackColor = true;
+            this.ButtonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
-            // textBox3
+            // LabelPort
             // 
-            this.textBox3.Location = new System.Drawing.Point(92, 83);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 5;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(15, 123);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Connect";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(117, 123);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.LabelPort.AutoSize = true;
+            this.LabelPort.Location = new System.Drawing.Point(12, 53);
+            this.LabelPort.Name = "LabelPort";
+            this.LabelPort.Size = new System.Drawing.Size(26, 13);
+            this.LabelPort.TabIndex = 1;
+            this.LabelPort.Text = "Port";
             // 
             // ConnectForm
             // 
+            this.AcceptButton = this.ButtonConnect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(213, 168);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.CancelButton = this.ButtonCancel;
+            this.ClientSize = new System.Drawing.Size(213, 124);
+            this.Controls.Add(this.ButtonCancel);
+            this.Controls.Add(this.ButtonConnect);
+            this.Controls.Add(this.TextBoxServerPort);
+            this.Controls.Add(this.TextBoxServerAddress);
+            this.Controls.Add(this.LabelPort);
+            this.Controls.Add(this.LabelServerAddress);
             this.Name = "ConnectForm";
             this.Text = "Connect";
             this.ResumeLayout(false);
@@ -127,13 +110,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label LabelServerAddress;
+        private System.Windows.Forms.TextBox TextBoxServerAddress;
+        private System.Windows.Forms.TextBox TextBoxServerPort;
+        private System.Windows.Forms.Button ButtonConnect;
+        private System.Windows.Forms.Button ButtonCancel;
+        private System.Windows.Forms.Label LabelPort;
     }
 }

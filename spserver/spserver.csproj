@@ -51,7 +51,6 @@
     <Compile Include="Client.cs" />
     <Compile Include="ClientAuthenticator.cs" />
     <Compile Include="CommandInterpreter.cs" />
-    <Compile Include="Commands\FartCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\PrivateMessageCommand.cs" />
