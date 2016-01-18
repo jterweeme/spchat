@@ -15,7 +15,6 @@ namespace spserver
             _commandList.Add(new LoginCommand());
             _commandList.Add(new PrivateMessageCommand());
             _commandList.Add(new RegisterCommand());
-            _commandList.Add(new FartCommand());
         }
 
         public static CommandInterpreter GetInterpreter()
