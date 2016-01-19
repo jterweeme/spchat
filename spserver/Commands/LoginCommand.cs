@@ -27,6 +27,12 @@ namespace spserver.Commands
             var username = parameters[0];
             var password = parameters[1];
 
+            if (Server.GetServer().IsUserOnline(username))
+            {
+                client.DisplayString("The user account is already in use.");
+                return;
+            }
+
             var isLoginSuccessful = ClientAuthenticator.Authenticate(client, username, password);
 
             if (!isLoginSuccessful)

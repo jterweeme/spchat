@@ -1,6 +1,7 @@
 ﻿using System;
 using spserver.Models;
 using spserver.Utilities;
+using System.Text;
 
 namespace spserver.Commands
 {
@@ -13,14 +14,21 @@ namespace spserver.Commands
 
         private void SendPrivateMessage(Client client, string[] parameters)
         {
-            if (parameters.Length != 2)
+            if (parameters.Length < 2)
             {
                 client.DisplayString("Incorrect syntax. Use /pm [username] [message]");
                 return;
             }
 
             var username = parameters[0];
-            var message = parameters[1];
+
+            var message = new StringBuilder();
+            for (var i = 1; i < parameters.Length; i++)
+            {
+                if (i > 1)
+                    message.Append(" ");
+                message.Append(parameters[i]);
+            }
 
             if (username == client.User.Username)
             {
@@ -38,7 +46,7 @@ namespace spserver.Commands
             {
                 FromUser = client.User.Username,
                 ToUser = username,
-                Message = message,
+                Message = message.ToString(),
                 Time = DateTime.Now
             };
 

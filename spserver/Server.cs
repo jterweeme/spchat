@@ -68,7 +68,7 @@ namespace spserver
 
         public Client GetUser(string username)
         {
-            return Clients.FirstOrDefault(c => c.User.Username == username);
+            return Clients.FirstOrDefault(c => c.User?.Username == username);
         }
 
         public bool IsUserOnline(string username)
