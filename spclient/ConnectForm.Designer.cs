@@ -58,6 +58,7 @@
             this.TextBoxServerPort.Name = "TextBoxServerPort";
             this.TextBoxServerPort.Size = new System.Drawing.Size(100, 20);
             this.TextBoxServerPort.TabIndex = 4;
+            this.TextBoxServerPort.Text = "1234";
             // 
             // ButtonConnect
             // 
@@ -71,6 +72,7 @@
             // 
             // ButtonCancel
             // 
+            this.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.ButtonCancel.Location = new System.Drawing.Point(117, 84);
             this.ButtonCancel.Name = "ButtonCancel";
             this.ButtonCancel.Size = new System.Drawing.Size(75, 23);

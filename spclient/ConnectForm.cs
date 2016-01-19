@@ -23,7 +23,16 @@ namespace spclient
         private void ButtonConnect_Click(object sender, EventArgs e)
         {
             _connectInformation.ServerAddress = TextBoxServerAddress.Text;
-            _connectInformation.Port = Parse(TextBoxServerPort.Text);
+            try
+            {
+                _connectInformation.Port = Parse(TextBoxServerPort.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The port number is not valid. Please try again.");
+                return;
+            }
+            
 
             DialogResult = DialogResult.OK;
             Close();

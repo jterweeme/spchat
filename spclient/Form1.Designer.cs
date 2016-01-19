@@ -37,6 +37,7 @@
             this.TextBoxChat = new System.Windows.Forms.TextBox();
             this.TextBoxUserInput = new System.Windows.Forms.TextBox();
             this.ButtonSend = new System.Windows.Forms.Button();
+            this.disconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,6 +56,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.connectToolStripMenuItem,
+            this.disconnectToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -116,6 +118,14 @@
             this.ButtonSend.UseVisualStyleBackColor = true;
             this.ButtonSend.Click += new System.EventHandler(this.ButtonSend_Click);
             // 
+            // disconnectToolStripMenuItem
+            // 
+            this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
+            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.disconnectToolStripMenuItem.Text = "Disconnect";
+            this.disconnectToolStripMenuItem.Visible = false;
+            this.disconnectToolStripMenuItem.Click += new System.EventHandler(this.disconnectToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.ButtonSend;
@@ -147,6 +157,7 @@
         private System.Windows.Forms.TextBox TextBoxChat;
         private System.Windows.Forms.TextBox TextBoxUserInput;
         private System.Windows.Forms.Button ButtonSend;
+        private System.Windows.Forms.ToolStripMenuItem disconnectToolStripMenuItem;
     }
 }
 

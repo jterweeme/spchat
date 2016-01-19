@@ -51,6 +51,9 @@ namespace spclient
             var thread = new Thread(GetMessageThread);
             thread.IsBackground = true;
             thread.Start();
+
+            connectToolStripMenuItem.Visible = false;
+            disconnectToolStripMenuItem.Visible = true;
         }
 
         public static bool ValidateCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
@@ -115,6 +118,14 @@ namespace spclient
         {
             _binaryStream.Writer.Write(message);
             _binaryStream.Writer.Flush();
+        }
+
+        private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _clientSocket.Close();
+
+            connectToolStripMenuItem.Visible = true;
+            disconnectToolStripMenuItem.Visible = false;
         }
     }
 }
